@@ -2,7 +2,7 @@ from datetime import datetime
 import openai
 
 # set up the OpenAI API client
-api_key = "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"
+api_key = ""
 # use the davinci model for generating code
 model_engine = "gpt-3.5-turbo"
 
