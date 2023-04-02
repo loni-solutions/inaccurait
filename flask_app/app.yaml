@@ -1,3 +1,19 @@
-runtime: custom
-env: flex
-instance_class: F2
+runtime: python39
+
+entrypoint: gunicorn -b :8080 app:app
+
+# env_variables:
+#   ENV_VAR_NAME_1: 'your-value-1'
+#   ENV_VAR_NAME_2: 'your-value-2'
+
+handlers:
+- url: /api/.*
+  script: auto
+
+- url: /(.*\.(html|css|js|ico|json|png|jpg|jpeg|gif|svg|woff|woff2|ttf|otf|eot|map))$
+  static_files: react_app/build/\1
+  upload: react_app/build/.*\.(html|css|js|ico|json|png|jpg|jpeg|gif|svg|woff|woff2|ttf|otf|eot|map)$
+
+- url: /.*
+  static_files: react_app/build/index.html
+  upload: react_app/build/index.html
